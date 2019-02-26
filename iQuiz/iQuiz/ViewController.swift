@@ -13,6 +13,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     var quizList : [String] = ["Mathematics", "Marvel Super Heros", "Science"]
     var desList : [String] = ["Math sucks", "Iron", "Yeet"]
+//    var imaage = ["math.jpg", "superhero.jpg", "science.jpg"]
+    var images = ["math.jpg", "superhero.jpg", "science.jpg"]
+    
+
+
     
     @IBAction func setting(_ sender: Any) {
         print("I was pressed")
@@ -32,7 +37,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
 
         let text = quizList[indexPath.row]
-        let des = quizList[indexPath.row]
+        let des = desList[indexPath.row]
+        cell.imageView?.image = UIImage(named: images[indexPath.row])
+
 
         cell.title.text = text
         cell.descr.text = des
@@ -47,8 +54,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         tableView.delegate = self
         tableView.dataSource = self
-
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
 
