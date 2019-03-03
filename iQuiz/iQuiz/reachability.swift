@@ -1,11 +1,11 @@
 //
-//  reachability.swift
-//  iQuizTests
+//  Reachability.swift
+//  iQuiz
 //
-//  Created by Phillip Park on 2/26/19.
+//  Created by Phillip Park on 3/1/19.
 //  Copyright © 2019 Phillip Park. All rights reserved.
-// Credit: https://stackoverflow.com/questions/1083701/how-to-check-for-an-active-internet-connection-on-ios-or-macos
 //
+
 
 import Foundation
 import SystemConfiguration
@@ -28,7 +28,7 @@ public class Reachability {
         if SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) == false {
             return false
         }
-
+        
         // Working for Cellular and WIFI
         let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
         let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0

@@ -2,13 +2,17 @@
 //  AnswerViewController.swift
 //  iQuiz
 //
-//  Created by Phillip Park on 2/26/19.
+//  Created by Phillip Park on 3/1/19.
 //  Copyright © 2019 Phillip Park. All rights reserved.
 //
 
 import UIKit
 
 class AnswerViewController: UIViewController {
+
+    @IBOutlet weak var correctText: UILabel!
+    @IBOutlet weak var indicator: UILabel!
+    @IBOutlet weak var question: UILabel!
     var correctAnswer : Int? // Correct answer
     var answer : Int?  // User selected
     var questions : [Questions]? // array of questions
@@ -17,19 +21,6 @@ class AnswerViewController: UIViewController {
     var correctAnswerString : String?
     var correctTotal : Int!
 
-    @IBOutlet weak var question: UILabel!
-    @IBOutlet weak var correctText: UILabel!
-    @IBOutlet weak var indicator: UILabel!
-    
-    
-    @IBAction func `continue`(_ sender: UIButton) {
-        if ((currentQuestionNum!) == questions!.count) {
-            performSegue(withIdentifier: "results", sender: self)
-        } else {
-            performSegue(withIdentifier: "question", sender: self)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         if (correct == true) {
@@ -39,11 +30,24 @@ class AnswerViewController: UIViewController {
         }
         self.question.text = self.questions![currentQuestionNum! - 1].text
         self.correctText.text = self.correctAnswerString
+        self.correctText.sizeToFit()
+        self.correctText.adjustsFontSizeToFitWidth = true
+        self.question.sizeToFit()
+        self.question.adjustsFontSizeToFitWidth = true
+        self.indicator.sizeToFit()
+        self.indicator.adjustsFontSizeToFitWidth = true
     }
     
+    @IBAction func `continue`(_ sender: Any) {
+        if ((currentQuestionNum!) == questions!.count) {
+            performSegue(withIdentifier: "results", sender: self)
+        } else {
+            performSegue(withIdentifier: "question", sender: self)
+        }
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "question" {
-            let questionViewController = segue.destination as! QuestionViewController
+            let questionViewController = segue.destination as! QuestionsViewController
             questionViewController.currentQuestionNum = self.currentQuestionNum!
             questionViewController.questions = self.questions
             questionViewController.correctTotal = self.correctTotal
